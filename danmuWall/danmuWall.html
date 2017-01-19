@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>danmu Wall</title>
+   <!-- <link rel="stylesheet" href="style.css">-->
+    <style>
+        *{
+    font-family: "Microsoft Yahei",'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.container{
+    padding: 0 1em;
+}
+
+.wall{
+    border:1px solid gray;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.controller{
+    /*margin:1em auto;
+    max-width:300px;*/
+    text-align: center;
+}
+
+.controller>div{
+    margin-top:20px;
+}
+
+input{
+    width:300px;
+    height: 3em;
+    line-height: 1.5em;
+    padding: 5px 8px;
+    border-radius: 3px;
+    border:1px solid gray;
+    box-sizing: border-box;
+}
+
+.btn-group{
+    margin:0 auto;
+}
+
+button{
+    width: 130px;
+    padding: 10px 5px;
+    border: 1px solid rgb(235, 159, 67);
+    background: #fff;
+    letter-spacing: 3px
+}
+
+.danmu{
+    position: absolute;
+    visibility: hidden;
+    animation-name:danmu;
+    animation-duration:10s;
+    animation-timing-function: linear;
+    animation-delay: 1s;
+}
+
+@keyframes danmu{
+    0% {right: -30px;visibility: visible}
+    100%    {right: 100%;}
+}
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <danmu-wall :danmu-list="danmuList"></danmu-wall>
+    </div>
+    <template id="danmuWall">
+        <div class="container">
+            <div class="wall">
+                <span :style="top" class="danmu" v-for="danmu in danmuList">{{danmu.content}}</span>
+            </div>
+
+            <div class="controller">
+                <div>
+                    <input type="text" placeholder="说点什么..." v-model="danmuContent">
+                </div>
+                <div class="btn-group">
+                    <button type="button" @click="sendDanmu">发射</button>
+                    <button type="button" @click="cleanScreen">清屏</button>
+                </div>
+
+            </div>
+        </div>
+    </template>
+</body>
+<script src="../common/js/vue.js"></script>
+<script src="danmuWall.js"></script>
+</html>
